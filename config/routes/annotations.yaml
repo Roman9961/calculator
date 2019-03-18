@@ -1,0 +1,10 @@
+main_controller:
+    resource: ../../src/Controller/DefaultController.php
+    type: annotation
+    prefix:
+        uk: /
+        ru: /ru
+
+controllers:
+    resource: ../../src/Controller/
+    type: annotation

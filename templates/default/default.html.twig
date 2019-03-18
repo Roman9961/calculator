@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% set user = app.user %}
+
+{% block header %}
+    <header>
+        <div class="container">
+            <div class="top-nav">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-md-auto">
+                        <div class="top-nav__logo">
+                            <a href="{{ path('default') }}">
+                                <img src="https://picsum.photos/300" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    {#/col-md#}
+                    <div class="col-md-auto">
+                        <ul class="nav nav-justified">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Contacts</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Lang</a>
+                                <div class="dropdown-menu">
+                                    {% for locale in locales %}
+                                        <a class="dropdown-item {% if app.request.locale == locale %}active{% endif %}" href="#" data-locale ="{% if locale != default_locale %}{{ locale }}{% endif %}"  {% if app.request.locale != locale %}onClick="changeLocale(event)"{% endif %}>{{ locale | upper }}</a>
+                                        {#<a class="dropdown-item" href="#">RU</a>#}
+                                    {% endfor %}
+                                </div>
+                            </li>
+                            <li class="nav-item">
+
+                                <a class="nav-link active" {% if not user %} data-toggle="modal" data-target="#loginModal" {% endif %} href=" {% if not user %}#{% else %}{{ path('logout') }}{% endif %}">
+                                    {% if not user %}Login{% else %}Logout{% endif %}
+                                </a>
+                            </li>
+                        </ul>
+                        {#<ul class="top-nav__menu">#}
+                        {#<li>Contacts</li>#}
+                        {#<li>Lang</li>#}
+                        {#<li>Enter</li>#}
+                        {#</ul>#}
+                    </div>
+                    {#/col-md#}
+                </div>
+                {#/row#}
+            </div>
+            {#/top-nav#}
+        </div>
+        {#/container#}
+    </header>
+    <script>
+        function changeLocale(e) {
+            if (location.pathname.substr(0, 4).match('\/uk\/|\/ru\/')) {
+                location.href = location.origin +  e.target.dataset.locale + location.pathname.substr(3);
+            }
+            else {
+                location.href = location.origin + '/' + e.target.dataset.locale + location.pathname;
+            }
+        }
+    </script>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body" id="loginModalBody">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+
+{% endblock %}

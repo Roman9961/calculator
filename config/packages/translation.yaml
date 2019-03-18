@@ -1,0 +1,12 @@
+framework:
+    default_locale: '%locale%'
+    translator:
+        default_path: '%kernel.project_dir%/translations'
+        fallbacks:
+            - '%locale%'
+
+a2lix_translation_form:
+    locale_provider: default
+    locales: ['uk', 'ru']
+    default_locale: 'uk'
+    templating: "@A2lixTranslationForm/bootstrap_4_layout.html.twig"

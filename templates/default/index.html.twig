@@ -1,0 +1,14 @@
+{% extends 'default/default.html.twig' %}
+
+{% block body %}
+    <div class="container" id="root">
+        <div class="row">
+            <div class="col">
+                {% for product in products %}
+
+                    <a href="{{ path('product', { 'slug': product.slug }) }}"><h1><span class="badge badge-success">{{ product.name }}</span></h1></a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
